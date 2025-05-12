@@ -1,6 +1,10 @@
 version: 0.0
 os: linux
 
+files:
+  - source: /
+    destination: /home/ubuntu/code-temp 
+
 hooks:
   BeforeInstall:
     - location: scripts/before_install.sh
@@ -16,5 +20,3 @@ hooks:
     - location: scripts/start_server.sh
       timeout: 300
       runas: ubuntu
-
-
