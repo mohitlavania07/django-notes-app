@@ -1,18 +1,22 @@
 #!/bin/bash
-set -e
 
+# Navigate to the project directory
 cd /home/ubuntu/django-notes-app
 
-echo "[AfterInstall] Activating virtualenv..."
-source venv/bin/activate
+# Check if virtualenv exists
+if [ ! -d "/home/ubuntu/django-notes-app/venv" ]; then
+  echo "Virtualenv not found. Creating a new one..."
+  python3 -m venv /home/ubuntu/django-notes-app/venv
+fi
 
-echo "[AfterInstall] Installing dependencies..."
-pip install -r requirements.txt
+# Activate virtual environment
+source /home/ubuntu/django-notes-app/venv/bin/activate
 
-echo "[AfterInstall] Migrating database..."
-python manage.py migrate
+echo "[AFTER INSTALL] Installing dependencies..."
+pip install -r /home/ubuntu/django-notes-app/requirements.txt
 
-echo "[AfterInstall] Collecting static files..."
+echo "[AFTER INSTALL] Applying DB migrations..."
+python manage.py migrate --noinput
+
+echo "[AFTER INSTALL] Collecting static files..."
 python manage.py collectstatic --noinput
-
-echo "[AfterInstall] Done."
