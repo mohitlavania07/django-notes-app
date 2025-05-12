@@ -1,18 +1,11 @@
 #!/bin/bash
 set -e
 
-echo "[INFO] Starting safe sync..."
-DEPLOY_DIR="/home/ubuntu/django-notes-app"
-SOURCE_DIR=$(pwd)
+echo "[BeforeInstall] Copying new files only (skip existing) to /home/ubuntu/django-notes-app..."
 
-mkdir -p "$DEPLOY_DIR"
+sudo rsync -av --ignore-existing /home/ubuntu/code-temp/ /home/ubuntu/django-notes-app/
 
-echo "[INFO] Syncing files without overwriting existing ones..."
-sudo rsync -av --ignore-existing "$SOURCE_DIR"/ "$DEPLOY_DIR"/
+echo "[BeforeInstall] Clean temp code directory..."
+sudo rm -rf /home/ubuntu/code-temp
 
-echo "[INFO] Sync complete."
-
-
-
-
-
+echo "[BeforeInstall] Done."
