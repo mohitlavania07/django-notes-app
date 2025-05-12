@@ -9,7 +9,8 @@ SOURCE_DIR=$CODEDEPLOY_DEPLOYMENT_ROOT/$CODEDEPLOY_DEPLOYMENT_GROUP_ID/deploymen
 mkdir -p $DEPLOY_DIR
 
 # rsync to copy only new files, skip existing ones
-sudo rsync -av --ignore-existing $SOURCE_DIR/ $DEPLOY_DIR/
+sudo rsync -av --ignore-existing --exclude='buildspec.yml' $SOURCE_DIR/ $DEPLOY_DIR/
+
 
 
 
