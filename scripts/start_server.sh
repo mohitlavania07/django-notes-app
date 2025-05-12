@@ -1,6 +1,5 @@
 #!/bin/bash
 echo "Starting Django service..."
-systemctl daemon-reexec
-systemctl daemon-reload
-systemctl restart django.service
+sudo systemctl daemon-reload
+sudo systemctl restart django.service
 
