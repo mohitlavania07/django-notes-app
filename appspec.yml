@@ -1,27 +1,17 @@
 version: 0.0
 os: linux
+
 files:
   - source: /
-    destination: /home/ubuntu/django-notes-app
-    overwrite: yes
+    destination: /home/ubuntu/tmp_deploy
 
 hooks:
-  BeforeInstall:
-    - location: scripts/before_install.sh
-      timeout: 300
-      runas: ubuntu
-
   AfterInstall:
     - location: scripts/after_install.sh
       timeout: 300
       runas: ubuntu
 
   ApplicationStart:
-    - location: scripts/start_server.sh
+    - location: scripts/application_start.sh
       timeout: 300
-      runas: ubuntu
-
-  ApplicationStop:
-    - location: scripts/stop_server.sh
-      timeout: 180
       runas: ubuntu
