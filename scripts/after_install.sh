@@ -1,14 +1,5 @@
 #!/bin/bash
-cd /home/ubuntu/django-notes-app
-echo "Activating virtual environment..."
-source venv/bin/activate
+echo "Copying new code over existing folder (overwriting if exists)..."
+rsync -av --delete /home/ubuntu/tmp_deploy/ /home/ubuntu/django-notes-app/
 
-echo "Installing dependencies..."
-pip install -r requirements.txt
-
-echo "Collecting static files..."
-python manage.py collectstatic --noinput
-
-echo "Applying database migrations..."
-python manage.py migrate
 
