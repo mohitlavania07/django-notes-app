@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/tmp_deploy
+    destination: /home/ubuntu//django-notes-app
 
 hooks:
   AfterInstall:
