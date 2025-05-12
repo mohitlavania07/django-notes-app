@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.10
+    commands:
+      - echo Installing dependencies...
+      - pip install -r requirements.txt
+
+  pre_build:
+    commands:
+      - echo Collecting static files...
+      - python manage.py collectstatic --noinput
+      - echo Running migrations...
+      - python manage.py migrate
+
+  build:
+    commands:
+      - echo Build phase completed.
+
+  post_build:
+    commands:
+      - echo Build completed. Preparing for deployment...
+      - echo Copying files to CodeDeploy...
+artifacts:
+  files:
+    - '**/*'
+    - appspec.yml
+    - scripts/**/*
