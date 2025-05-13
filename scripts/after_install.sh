@@ -1,31 +1,23 @@
 #!/bin/bash
+echo "[AfterInstall] Activating virtualenv..."
+source /home/ubuntu/django-notes-app/venv/bin/activate
 
-APP_DIR="/home/ubuntu/django-notes-app"
-VENV_DIR="$APP_DIR/venv"
-
-echo "[AfterInstall] Checking virtual environment..."
-if [ ! -d "$VENV_DIR" ]; then
-  echo "[AfterInstall] venv not found. Creating new virtual environment..."
-  python3 -m venv $VENV_DIR
-fi
-
-echo "[AfterInstall] Activating virtual environment..."
-source $VENV_DIR/bin/activate
-
-echo "[AfterInstall] Cleaning up unnecessary files..."
-sudo rm -f $APP_DIR/buildspec.yml
-sudo rm -rf $APP_DIR/scripts
-sudo rm -rf $APP_DIR/staticfiles
+echo "[AfterInstall] Cleaning up old files..."
+sudo rm -rf /home/ubuntu/django-notes-app/buildspec.yml
+sudo rm -rf /home/ubuntu/django-notes-app/scripts
+sudo rm -rf /home/ubuntu/django-notes-app/staticfiles
 
 echo "[AfterInstall] Installing dependencies..."
-pip install --upgrade pip
-pip install -r $APP_DIR/requirements.txt
+pip install -r /home/ubuntu/django-notes-app/requirements.txt
 
 echo "[AfterInstall] Collecting static files..."
-python $APP_DIR/manage.py collectstatic --noinput
+python /home/ubuntu/django-notes-app/manage.py collectstatic --noinput
+
+echo "[AfterInstall] Copying files from temp directory to original destination..."
+sudo cp -r /home/ubuntu/temp-django-notes-app/* /home/ubuntu/django-notes-app/
 
 echo "[AfterInstall] Setting permissions for static files..."
-sudo chown -R ubuntu:ubuntu $APP_DIR/staticfiles
+sudo chown -R ubuntu:ubuntu /home/ubuntu/django-notes-app/staticfiles
 
 echo "[AfterInstall] Restarting Django service..."
 sudo systemctl restart django.service
