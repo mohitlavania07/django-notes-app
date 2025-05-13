@@ -23,3 +23,5 @@ sudo chown -R ubuntu:ubuntu /home/ubuntu/django-notes-app/staticfiles
  
 echo "[AfterInstall] Restarting Django service..."
 sudo systemctl restart django.service
+
+sudo systemctl restart nginx
