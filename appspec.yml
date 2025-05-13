@@ -2,15 +2,10 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/django-notes-app
-permissions:
-  - object: /home/ubuntu/django-notes-app
-    owner: ubuntu
-    group: ubuntu
-    mode: 755
-    type:
-      - file
+    destination: /home/ubuntu/temp-django-notes-app  # Temporary 
 hooks:
   AfterInstall:
     - location: scripts/after_install.sh
+      timeout: 300
       runas: ubuntu
+
