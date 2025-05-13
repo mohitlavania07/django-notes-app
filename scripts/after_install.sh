@@ -19,5 +19,7 @@ sudo cp -r /home/ubuntu/temp-django-notes-app/* /home/ubuntu/django-notes-app/
 echo "[AfterInstall] Setting permissions for static files..."
 sudo chown -R ubuntu:ubuntu /home/ubuntu/django-notes-app/staticfiles
 
+ sudo systemctl daemon-reload
+ 
 echo "[AfterInstall] Restarting Django service..."
 sudo systemctl restart django.service
