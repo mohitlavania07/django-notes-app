@@ -13,9 +13,9 @@ echo "[AfterInstall] Activating virtual environment..."
 source $VENV_DIR/bin/activate
 
 echo "[AfterInstall] Cleaning up unnecessary files..."
-rm -f $APP_DIR/buildspec.yml
-rm -rf $APP_DIR/scripts
-rm -rf $APP_DIR/staticfiles
+sudo rm -f $APP_DIR/buildspec.yml
+sudo rm -rf $APP_DIR/scripts
+sudo rm -rf $APP_DIR/staticfiles
 
 echo "[AfterInstall] Installing dependencies..."
 pip install --upgrade pip
