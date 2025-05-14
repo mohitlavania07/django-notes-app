@@ -1,27 +1,27 @@
 #!/bin/bash
 
-echo "[AfterInstall] Cleaning up previous temp project if exists..."
-sudo rm -rf /home/ubuntu/django-notes-app-old
+echo "[AfterInstall] Copying updated code from temp to main project..."
 
-echo "[AfterInstall] Backing up current project before overwrite..."
-sudo mv /home/ubuntu/django-notes-app /home/ubuntu/django-notes-app-old
+# Copy everything **except** venv, staticfiles, and AWS config files
+rsync -av --exclude 'venv' \
+          --exclude 'staticfiles' \
+          --exclude 'buildspec.yml' \
+          --exclude 'scripts' \
+          /home/ubuntu/temp-django-notes-app/ /home/ubuntu/django-notes-app/
 
-echo "[AfterInstall] Copying new files to main project folder..."
-sudo cp -r /home/ubuntu/temp-django-notes-app /home/ubuntu/django-notes-app
-
-echo "[AfterInstall] Setting permissions..."
+echo "[AfterInstall] Setting correct permissions..."
 sudo chown -R ubuntu:ubuntu /home/ubuntu/django-notes-app
 
 echo "[AfterInstall] Activating virtualenv..."
 source /home/ubuntu/django-notes-app/venv/bin/activate
 
-echo "[AfterInstall] Installing dependencies..."
+echo "[AfterInstall] Installing Python dependencies..."
 pip install -r /home/ubuntu/django-notes-app/requirements.txt
 
 echo "[AfterInstall] Collecting static files..."
 python /home/ubuntu/django-notes-app/manage.py collectstatic --noinput
 
-echo "[AfterInstall] Restarting Django & Nginx..."
+echo "[AfterInstall] Restarting services..."
 sudo systemctl daemon-reload
 sudo systemctl restart django.service
 sudo systemctl restart nginx
