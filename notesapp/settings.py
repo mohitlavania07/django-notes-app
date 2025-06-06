@@ -18,7 +18,7 @@ SESSION_CACHE_ALIAS = "default"
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['python.vipin.life']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
