@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'notesapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'notesdb',
-        'USER': 'admin',
-        'PASSWORD': 'admin9818165149',
-        'HOST': 'node-application-database.cwrey2sk8xkr.us-east-1.rds.amazonaws.com',
+        'NAME': 'test_db',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'db_cont',
         'PORT': '3306',
     }
 }
